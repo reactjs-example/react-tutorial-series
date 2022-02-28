@@ -28,7 +28,7 @@ const element1 = React.createElement(
   'Hello, world!'
 );
 
-// Note: this structure is simplified
+// Note: above structure is simplified
 const element2 = {
   type: 'h1',
   props: {

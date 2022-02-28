@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). `npx create-react-app react-hello-world`
+`npx create-react-app react-hello-world`
 
 In App.js
 ```JSX
@@ -27,6 +27,56 @@ ReactDOM.render(
 );
 ```
 
+# react and JSX
+
+```JSX
+const user = {
+    firstName: 'John',
+    lastName: 'Smith',
+    imagepath: 'https://i.picsum.photos/id/53/536/354.jpg?hmac=euVx3A4eNgurvH-V7r2HyjXq_AB675dX5VEJ34UYsCs'
+  }
+function formatName(user) {
+  return user.firstName + ' ' + user.lastName;
+}
+
+function formatName1(user) {
+  if (user) {
+    return <h1> Welcome, {user.firstName + ' ' + user.lastName} </h1>;
+  }
+  else {
+    return <h1> Welcome, Stranger</h1>
+  }
+}
+function displayImage(user) {
+  return <img src={user.imagepath} />
+}
+// Babel compiles JSX down to React.createElement() calls.
+const element = (
+  <h1 className="greeting">
+    Hello, world!
+  </h1>
+);
+
+const element1 = React.createElement(
+  'h1',
+  { className: 'greeting' },
+  'Hello, world!'
+);
+```
+
+Using above resources in DOM.
+
+```JSX
+ <div>Welcome {formatName(user)} to React
+        {displayImage(user)}
+      </div>
+
+      {formatName1()}
+      {formatName1(user)}
+
+      {element}
+      {element1}
+```
 ## Available Scripts
 
 In the project directory, you can run:
