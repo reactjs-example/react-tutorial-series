@@ -36,13 +36,15 @@ const element2 = {
     children: 'Hello, world!'
   }
 };
-function App() {
-  const name = 'John Doe';
+const name = 'John Doe';
   const user = {
     firstName: 'John',
     lastName: 'Smith',
     imagepath: 'https://i.picsum.photos/id/53/536/354.jpg?hmac=euVx3A4eNgurvH-V7r2HyjXq_AB675dX5VEJ34UYsCs'
   }
+
+function reactHelloWorld()
+{
   return (
     <div>
       <h1>Welcome to react
@@ -59,6 +61,16 @@ function App() {
       {element1}
     </div>
   );
+} 
+// END - REACT HELLO WORLD & JSX
+function reactHandler()
+{
+  return reactHelloWorld();
+} 
+
+
+function App() {
+  return reactHandler();
 }
 
 export default App
