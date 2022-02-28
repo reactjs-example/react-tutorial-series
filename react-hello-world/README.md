@@ -1,6 +1,31 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). `npx create-react-app react-hello-world`
+
+In App.js
+```JSX
+function App() {
+  return (
+    <div>
+      <h1>Welcome to react
+      </h1>
+    </div>
+  );
+}
+
+export default App
+```
+
+In index.js
+
+```JSX
+ReactDOM.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById('root')
+);
+```
 
 ## Available Scripts
 
