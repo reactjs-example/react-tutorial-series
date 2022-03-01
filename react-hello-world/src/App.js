@@ -70,19 +70,19 @@ function Welcome(props) {
 function componentAndProps() {
   return (
     <div>
-        <Welcome name="Sara" city="DEL" />
-        <Welcome name="Kyle" city="MUM" />
-        <Welcome name="Drevis" city="BLR" />
+      <Welcome name="Sara" city="DEL" />
+      <Welcome name="Kyle" city="MUM" />
+      <Welcome name="Drevis" city="BLR" />
     </div>
   );
 }
 // END - COMPONENT AND PROPS
-class Clock extends React.Component{
+class Clock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       date: new Date(),
-      count:0
+      count: 0
     };
   }
 
@@ -98,7 +98,7 @@ class Clock extends React.Component{
   }
 
   tick() {
-    this.setState((prevState)=>({
+    this.setState((prevState) => ({
       date: new Date(),
       count: prevState.count + 1
     }));
@@ -114,19 +114,79 @@ class Clock extends React.Component{
   }
 }
 
-function stateAndLifeCycle()
-{
+function stateAndLifeCycle() {
   return (
     <div>
-        <Clock/>
+      <Clock />
     </div>
   );
 }
 // END - STATE and LIFE CYCLE
+
+class Form extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+
+  handleClick1() {
+    this.setState(prevState => ({
+      isToggleOn: !prevState.isToggleOn
+    }));
+  }
+  handleSubmit = (event) => {
+    event.preventDefault(); // this restricts page reaload due to form submit
+    console.log(event);
+  }
+  handleDelete = (e,id)=>{
+    console.log(e);
+    console.log(id);
+  }
+  render() {
+    return <div>
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" />
+        <button onClick={this.handleSubmit}>Save</button>
+        <button type="submit">Submit</button>
+        <button onClick={this.handleClick}>
+          {this.state.isToggleOn ? 'ON' : 'OFF'}
+        </button>
+        <button onClick={()=>this.handleClick1()}>
+          {this.state.isToggleOn ? 'ON' : 'OFF'}
+        </button>
+        <button onClick={(e) => this.handleDelete(2,3,e)}>
+          DELETE 1
+        </button>
+        <button onClick={this.handleDelete.bind(this,200,300)}>
+          DELETE 2
+        </button>
+      </form>
+    </div>
+  }
+
+}
+function eventHandler() {
+  return (
+
+    <Form />
+
+  );
+}
 function reactHandler() {
   // return reactHelloWorld();
   // return componentAndProps();
-  return stateAndLifeCycle();
+  // return stateAndLifeCycle();
+  return eventHandler();
 }
 
 
