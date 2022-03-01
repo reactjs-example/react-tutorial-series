@@ -76,7 +76,7 @@ function componentAndProps() {
     </div>
   );
 }
-
+// END - COMPONENT AND PROPS
 class Clock extends React.Component{
   constructor(props) {
     super(props);
@@ -122,7 +122,7 @@ function stateAndLifeCycle()
     </div>
   );
 }
-
+// END - STATE and LIFE CYCLE
 function reactHandler() {
   // return reactHelloWorld();
   // return componentAndProps();
