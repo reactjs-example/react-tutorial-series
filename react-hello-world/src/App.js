@@ -148,7 +148,7 @@ class Form extends React.Component {
     event.preventDefault(); // this restricts page reaload due to form submit
     console.log(event);
   }
-  handleDelete = (e,id)=>{
+  handleDelete = (e, id) => {
     console.log(e);
     console.log(id);
   }
@@ -161,13 +161,13 @@ class Form extends React.Component {
         <button onClick={this.handleClick}>
           {this.state.isToggleOn ? 'ON' : 'OFF'}
         </button>
-        <button onClick={()=>this.handleClick1()}>
+        <button onClick={() => this.handleClick1()}>
           {this.state.isToggleOn ? 'ON' : 'OFF'}
         </button>
-        <button onClick={(e) => this.handleDelete(2,3,e)}>
+        <button onClick={(e) => this.handleDelete(2, 3, e)}>
           DELETE 1
         </button>
-        <button onClick={this.handleDelete.bind(this,200,300)}>
+        <button onClick={this.handleDelete.bind(this, 200, 300)}>
           DELETE 2
         </button>
       </form>
@@ -182,11 +182,137 @@ function eventHandler() {
 
   );
 }
+// END - EVENT HANDLING
+function UserGreeting(props) {
+  return <h1>Welcome back!</h1>;
+}
+
+function GuestGreeting(props) {
+  return <h1>Please sign up.</h1>;
+}
+
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+function LoginButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Login
+    </button>
+  );
+}
+
+function LogoutButton(props) {
+  return (
+    <button onClick={props.onClick}>
+      Logout
+    </button>
+  );
+}
+
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = { isLoggedIn: false };
+  }
+
+  handleLoginClick() {
+    this.setState({ isLoggedIn: true });
+  }
+
+  handleLogoutClick() {
+    this.setState({ isLoggedIn: false });
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
+        {button}
+        <br />
+        <br />
+        <br />
+        Show with inline if again
+        {isLoggedIn ?
+          <LogoutButton onClick={this.handleLogoutClick} /> :
+          <LoginButton onClick={this.handleLoginClick} />
+        }
+      </div>
+    );
+  }
+}
+
+function WarningBanner(props) {
+  if (!props.warn) {
+    return null;
+  }
+
+  return (
+    <div className="warning" style={{ color: "red" }}>
+      Warning!
+    </div>
+  );
+}
+
+class WarningPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showWarning: true
+    }
+    this.toggleWarning = this.toggleWarning.bind(this);
+  }
+
+  toggleWarning() {
+    this.setState(prevState => ({
+      showWarning: !prevState.showWarning
+    }));
+  }
+
+  render() {
+    return <div>
+      <WarningBanner warn={this.state.showWarning} />
+      <button onClick={this.toggleWarning}>{this.state.showWarning ? 'SHOW' : 'HIDE'}</button>
+    </div>
+  }
+}
+function conditionalRendering() {
+  return (
+    <div>
+      <Greeting isLoggedIn={false} />
+      <Greeting isLoggedIn={true} />
+      <br />
+      using Login and Logout
+      <LoginControl />
+      <WarningPage />
+    </div>
+  )
+}
+// END - CONDITIONAL RENDERING
 function reactHandler() {
   // return reactHelloWorld();
   // return componentAndProps();
   // return stateAndLifeCycle();
-  return eventHandler();
+  // return eventHandler();
+  return conditionalRendering();
 }
 
 
