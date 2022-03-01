@@ -37,14 +37,13 @@ const element2 = {
   }
 };
 const name = 'John Doe';
-  const user = {
-    firstName: 'John',
-    lastName: 'Smith',
-    imagepath: 'https://i.picsum.photos/id/53/536/354.jpg?hmac=euVx3A4eNgurvH-V7r2HyjXq_AB675dX5VEJ34UYsCs'
-  }
+const user = {
+  firstName: 'John',
+  lastName: 'Smith',
+  imagepath: 'https://i.picsum.photos/id/53/536/354.jpg?hmac=euVx3A4eNgurvH-V7r2HyjXq_AB675dX5VEJ34UYsCs'
+}
 
-function reactHelloWorld()
-{
+function reactHelloWorld() {
   return (
     <div>
       <h1>Welcome to react
@@ -61,12 +60,74 @@ function reactHelloWorld()
       {element1}
     </div>
   );
-} 
+}
 // END - REACT HELLO WORLD & JSX
-function reactHandler()
+
+function Welcome(props) {
+  return <h1>Hello, {props.name}. I am from {props.city}</h1>;
+}
+
+function componentAndProps() {
+  return (
+    <div>
+        <Welcome name="Sara" city="DEL" />
+        <Welcome name="Kyle" city="MUM" />
+        <Welcome name="Drevis" city="BLR" />
+    </div>
+  );
+}
+
+class Clock extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: new Date(),
+      count:0
+    };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState((prevState)=>({
+      date: new Date(),
+      count: prevState.count + 1
+    }));
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}. Tick Count:  {this.state.count}</h2>
+      </div>
+    );
+  }
+}
+
+function stateAndLifeCycle()
 {
-  return reactHelloWorld();
-} 
+  return (
+    <div>
+        <Clock/>
+    </div>
+  );
+}
+
+function reactHandler() {
+  // return reactHelloWorld();
+  // return componentAndProps();
+  return stateAndLifeCycle();
+}
 
 
 function App() {
