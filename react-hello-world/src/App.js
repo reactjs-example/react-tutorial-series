@@ -307,12 +307,52 @@ function conditionalRendering() {
   )
 }
 // END - CONDITIONAL RENDERING
+
+function PostItem(props) {
+  const element = props.element;
+  return <li>
+    {element.title} | {element.content}
+  </li>
+}
+function PostList(props) {
+  const posts = props.posts;
+  // component can read props.id, but not props.key
+  const postItems = posts.map(e =>
+    // Key should be specified inside the array.
+    <PostItem key={e.id} element={e} />
+  );
+  return <ul>{postItems}</ul>
+}
+function ListKeysImpl() {
+  const list = [
+    {
+      id: 1,
+      content: "Welcome",
+      title: "title1"
+    },
+    {
+      id: 2,
+      content: "Welcome2",
+      title: "title2"
+    }
+  ];
+
+  return <PostList posts={list} />
+
+}
+function listAndKeys() {
+  return (
+    <div><ListKeysImpl></ListKeysImpl></div>
+  );
+}
+// END - LIST and KEYS
 function reactHandler() {
   // return reactHelloWorld();
   // return componentAndProps();
   // return stateAndLifeCycle();
   // return eventHandler();
-  return conditionalRendering();
+  // return conditionalRendering();
+  return listAndKeys();
 }
 
 
