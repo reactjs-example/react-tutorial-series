@@ -347,40 +347,37 @@ function listAndKeys() {
 }
 // END - LIST and KEYS
 
-function Child(props){
-  function childOnChange(e)
-  {
+function Child(props) {
+  function childOnChange(e) {
     console.log(e);
     console.log(e.target.value);
     props.onChildChange(e.target.value);
   }
-  
+
   const element = <div>
-    From Child: <input type="text" onChange={childOnChange}/>
+    From Child: <input type="text" onChange={childOnChange} />
   </div>
   return element
 }
-function Parent()
-{
-  const [state,setState]=useState({userName:""})
-  function parentHandler(val){
-    console.log("Entered Value: "+val);
-    setState(p=>({
+function Parent() {
+  const [state, setState] = useState({ userName: "" })
+  function parentHandler(val) {
+    console.log("Entered Value: " + val);
+    setState(p => ({
       ...p,
-      userName:val
+      userName: val
     }));
   }
   return <div>
-    <Child onChildChange={parentHandler}/>
+    <Child onChildChange={parentHandler} />
     <h1>From Parent {state.userName}</h1>
-    </div>
+  </div>
 }
-function liftingStateUp()
-{
+function liftingStateUp() {
   return (
     <div>
       Lifting StateUp : Child To Parent Communication
-      <Parent/>
+      <Parent />
     </div>
   )
 }
