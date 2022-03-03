@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function formatName(user) {
   return user.firstName + ' ' + user.lastName;
@@ -346,13 +346,52 @@ function listAndKeys() {
   );
 }
 // END - LIST and KEYS
+
+function Child(props){
+  function childOnChange(e)
+  {
+    console.log(e);
+    console.log(e.target.value);
+    props.onChildChange(e.target.value);
+  }
+  
+  const element = <div>
+    From Child: <input type="text" onChange={childOnChange}/>
+  </div>
+  return element
+}
+function Parent()
+{
+  const [state,setState]=useState({userName:""})
+  function parentHandler(val){
+    console.log("Entered Value: "+val);
+    setState(p=>({
+      ...p,
+      userName:val
+    }));
+  }
+  return <div>
+    <Child onChildChange={parentHandler}/>
+    <h1>From Parent {state.userName}</h1>
+    </div>
+}
+function liftingStateUp()
+{
+  return (
+    <div>
+      Lifting StateUp : Child To Parent Communication
+      <Parent/>
+    </div>
+  )
+}
 function reactHandler() {
   // return reactHelloWorld();
   // return componentAndProps();
   // return stateAndLifeCycle();
   // return eventHandler();
   // return conditionalRendering();
-  return listAndKeys();
+  // return listAndKeys();
+  return liftingStateUp();
 }
 
 
